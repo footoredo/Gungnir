@@ -1,0 +1,51 @@
+%!TEX program = xelatex
+\documentclass[landscape]{book}
+%\usepackage{ctex}
+\usepackage{bm}
+%\usepackage[fleqn]{amsmath}
+\usepackage{harpoon}
+\usepackage{fontspec}
+\usepackage{listings}
+\usepackage[left=1.5cm, right=1.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{bm}
+\usepackage{cmap}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{xeCJK}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{enumerate}
+\usepackage{indentfirst}
+\allowdisplaybreaks
+\oddsidemargin -0.1 true cm
+\if@twoside
+	\evensidemargin -0.1 true cm
+\fi
+%\setlength{\parindent}{0em}
+%\setlength{\mathindent}{0pt}
+\newfontfamily\Courier{Courier New}
+\lstset{
+	language=C++,
+	tabsize=4,
+	numbers=left,
+	breaklines=tr,
+	extendedchars=false
+	xleftmargin=0em,
+	xrightmargin=0em,
+	aboveskip=1em,
+	numberstyle=\small\Courier,
+    basicstyle=\small\Courier
+}
+\begin{document}
+	\title{\textbf{\LARGE{Gungnir's Standard Code Library}}}
+	\author{\emph{Shanghai Jiao Tong University}}
+	\date{Dated: \today}
+	\maketitle
+	\tableofcontents
+	\begin{spacing}{1.0}
+
+	\end{spacing}
+\end{document}
