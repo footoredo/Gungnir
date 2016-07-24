@@ -1,2 +1,2 @@
 # Gungnir
-Gungnir's standard code library.
+Gungnir's stuff.
