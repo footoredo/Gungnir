@@ -1,5 +1,5 @@
 %!TEX program = xelatex
-\documentclass[landscape]{book}
+\documentclass{book}
 %\usepackage{ctex}
 \usepackage{bm}
 %\usepackage[fleqn]{amsmath}
@@ -45,7 +45,8 @@
 	\date{Dated: \today}
 	\maketitle
 	\tableofcontents
+	\def \source {../source}
 	\begin{spacing}{1.0}
-
+		\input{\source/computational-geometry.tex}
 	\end{spacing}
 \end{document}
