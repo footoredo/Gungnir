@@ -1,5 +1,5 @@
 typedef double DB;
-const eps = 1e-8;
+const DB eps = 1e-8;
 
 __inline int sign(DB x) {
 	return x < -eps ? -1 : ( x > eps ? 1 : 0 );
