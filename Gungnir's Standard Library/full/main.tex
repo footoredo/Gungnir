@@ -5,15 +5,14 @@
 \usepackage[left=1.5cm, right=1.5cm]{geometry}
 \usepackage{listings, color, fontspec, minted, setspace, titlesec, fancyhdr, dingbat, mdframed, multicol}
 \usepackage{graphicx, amssymb, amsmath, textcomp, booktabs}
-\usepackage[Chinese]{ucharclasses}
+\usepackage{xeCJK}
 
 %\setlength{\parindent}{0em}
 %\setlength{\mathindent}{0pt}
 
 %configure fonts
 \setmonofont{Menlo}[Scale=0.8]
-\newfontfamily\substitutefont{STHeiti}[Scale=0.8]
-\setTransitionsForChinese{\begingroup\substitutefont}{\endgroup}
+\setCJKmainfont{STHeiti}
 
 \renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,0.5}{\scriptsize {\arabic{FancyVerbLine}}}}
 

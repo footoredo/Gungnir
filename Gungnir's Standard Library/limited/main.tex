@@ -57,7 +57,7 @@
 \usepackage{adjmulticol}
 \usepackage{titlesec}
 \usepackage{color,minted}
-\usepackage[Chinese]{ucharclasses}
+\usepackage{xeCJK}
 \allowdisplaybreaks
 %\setlength{\parindent}{0em}
 %\setlength{\mathindent}{0pt}
@@ -73,8 +73,7 @@
 \titlespacing*{\subsubsection}{0pt}{-1pt}{-1pt}
 %configure fonts
 \setmonofont{Menlo}[Scale=0.8]
-\newfontfamily\substitutefont{STHeiti}[Scale=0.8]
-\setTransitionsForChinese{\begingroup\substitutefont}{\endgroup}
+\setCJKmainfont{STHeiti}
 
 \renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,0.5}{\scriptsize {\arabic{FancyVerbLine}}}}
 

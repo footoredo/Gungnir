@@ -65,7 +65,7 @@ struct Convex {
 		ret = std::max(ret, get_tangent(lower, vec));
 		return ret.second;
 	}
-	// 求凸包和直线 u, v 的交点，如果不相交返回 false 如果有则是和 (i, next(i)) 的交点，交在点上不确定返回前后两条边其中之一
+	// 求凸包和直线 u, v 的交点，如果不相交返回 false，如果有则是和 (i, next(i)) 的交点，交在点上不确定返回前后两条边其中之一
 	bool get_intersection(Point u, Point v, int &i0, int &i1) {
 		int p0 = get_tangent(u - v), p1 = get_tangent(v - u);
 		if (sign(det(v - u, a[p0] - u)) * sign(det(v - u, a[p1] - u)) <= 0) {
