@@ -41,6 +41,7 @@ struct DCC {  // N = N0 + M0. Remember to call init(&raw_graph).
 					do {
 						int cur_e = stack[--top];
 						compress_to[expand_to[cur_e]] = cc;
+						compress_to[expand_to[cur_e^1]] = cc;
 						if (branch[cur_e]) {
 							int v = g->v[cur_e];
 							if (cut[v]) 
@@ -60,8 +61,8 @@ struct DCC {  // N = N0 + M0. Remember to call init(&raw_graph).
 		int n = g->n;
 		for (int i = 0; i < g->e; i++) {
 			expand_to[i] = g->new_node();
-			branch[i] = 0;
 		}
+		memset(branch, 0, sizeof(*branch) * g->e);
 		memset(dfn + g->base, 0, sizeof(*dfn) * n); DFN = 0;
 		for (int i = 0; i < n; i++)
 			if (!dfn[i + g->base]) {
