@@ -1,5 +1,5 @@
-const bool DCC_VERTEX = 0, DCC_EDGE = 1;
-struct DCC {  // N = N0 + M0. Remember to call init(&raw_graph).
+const bool BCC_VERTEX = 0, BCC_EDGE = 1;
+struct BCC {  // N = N0 + M0. Remember to call init(&raw_graph).
 	Graph *g, forest; // g is raw graph ptr.
 	int dfn[N], DFN, low[N];
 	int stack[N], top;
@@ -7,7 +7,7 @@ struct DCC {  // N = N0 + M0. Remember to call init(&raw_graph).
 	// Vertex i expaned to i.
 	int compress_to[N];  // Where vertex i is compressed to.
 	bool vertex_type[N], cut[N], compress_cut[N], branch[M];
-	//std::vector<int> DCC_component[N];  // Cut vertex belongs to none.
+	//std::vector<int> BCC_component[N];  // Cut vertex belongs to none.
 	__inline void init(Graph *raw_graph) {
 		g = raw_graph;
 	}
@@ -37,7 +37,7 @@ struct DCC {  // N = N0 + M0. Remember to call init(&raw_graph).
 					int cc = forest.new_node();
 					forest.bi_ins(compress_to[u], cc);
 					compress_cut[cc] = 0;
-					//DCC_component[cc].clear();
+					//BCC_component[cc].clear();
 					do {
 						int cur_e = stack[--top];
 						compress_to[expand_to[cur_e]] = cc;
@@ -47,7 +47,7 @@ struct DCC {  // N = N0 + M0. Remember to call init(&raw_graph).
 							if (cut[v]) 
 								forest.bi_ins(cc, compress_to[v]);
 							else {
-								//DCC_component[cc].push_back(v);
+								//BCC_component[cc].push_back(v);
 								compress_to[v] = cc;
 							}
 						}
@@ -70,8 +70,8 @@ struct DCC {  // N = N0 + M0. Remember to call init(&raw_graph).
 				DFS(i + g->base, -1);
 			}
 	}
-} dcc;
+} bcc;
 
-dcc.init(&raw_graph);
-dcc.solve();
-// Do something with dcc.forest ...
+bcc.init(&raw_graph);
+bcc.solve();
+// Do something with bcc.forest ...
