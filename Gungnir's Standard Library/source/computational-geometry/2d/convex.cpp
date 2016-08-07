@@ -1,8 +1,4 @@
-__inline void clear(std::vector<Point>& v) {
-	v.clear();
-	std::vector<Point>(v).swap(v);
-}
-
+// 凸包中的点按逆时针方向
 struct Convex {
 	int n;
 	std::vector<Point> a, upper, lower;
@@ -17,13 +13,12 @@ struct Convex {
 	}
 	void make_convex() {
 		std::sort(a.begin(), a.end());
-		make_shell(a, lower);
+		make_shell(a, lower); 
 		std::reverse(a.begin(), a.end());
 		make_shell(a, upper);
-		a = lower; 
-		for (std::vector<Point>::iterator it = upper.begin(); it != upper.end(); it++)
-			if (!(*it == *a.rbegin()) && !(*it == *a.begin()))
-				a.push_back(*it);
+		a = lower; a.pop_back();
+		a.insert(a.end(), upper.begin(), upper.end());
+		if ((int)a.size() >= 2) a.pop_back();
 		n = a.size();
 	}
 	void init(const std::vector<Point>& _a) {
