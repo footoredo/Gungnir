@@ -27,10 +27,10 @@ struct Point {
 	}
 };
 
-__inline DB dot(const P& a, const P& b) {
+__inline DB dot(const Point& a, const Point& b) {
 	return a.x * b.x + a.y * b.y;
 }
 
-__inline DB det(const P& a, const P& b) {
+__inline DB det(const Point& a, const Point& b) {
 	return a.x * b.y - a.y * b.x;
 }
