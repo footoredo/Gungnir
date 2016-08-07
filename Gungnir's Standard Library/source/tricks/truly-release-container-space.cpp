@@ -1,5 +1,5 @@
-// vectors for example.
-std::vector<int> v;
-// Do something with v...
-v.clear(); // Or having erased many.
-std::vector<int>(v).swap(v);
+template <typename T>
+__inline void clear(T& container) {
+	container.clear();  // 或者删除了一堆元素
+	T(container).swap(container);
+}
