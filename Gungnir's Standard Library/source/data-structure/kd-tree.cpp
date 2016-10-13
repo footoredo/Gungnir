@@ -74,7 +74,7 @@ bool compare(const Point &a, const Point &b) {
     return a.id < b.id;
 }
 
-//左閉右開: build(1, n + 1)
+// 左閉右開: build(1, n + 1)
 int build(int l, int r, int type = 1) {
     pivot = type;
     if (l >= r) {
@@ -107,8 +107,8 @@ int insert(int x, const Point &p, int type = 1) {
     return x;
 }
 
-//    For minimum distance
-//For maximum:下面递归query时0, 1 换顺序;< and >;min and max
+// For minimum distance
+// For maximum:下面递归query时0, 1 换顺序;< and >;min and max
 void query(int x, const Point &p, std::pair<long long, int> &answer, int type = 1) {
     pivot = type;
     if (x == 0 || tree[x].rectangle.dist(p) > answer.first) {
