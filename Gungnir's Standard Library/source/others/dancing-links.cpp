@@ -86,7 +86,7 @@ void construct() {
 				break;
 			}
 		for (int i = 0; i < cc; ++ i)
-			if (init[j][i]) {
+			if (entry[j][i]) {
 				last->r = who[j][i];
 				who[j][i]->l = last;
 				last = who[j][i];
