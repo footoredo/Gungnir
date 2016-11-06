@@ -1,7 +1,7 @@
 // getchar()读入优化 << 关同步cin << 此优化
 // 用isdigit()会小幅变慢
 // 返回 false 表示读到文件尾
-namespace Reader {  
+namespace Reader {
     const int L = (1 << 15) + 5;
     char buffer[L], *S, *T;
     __inline bool getchar(char &ch) {
