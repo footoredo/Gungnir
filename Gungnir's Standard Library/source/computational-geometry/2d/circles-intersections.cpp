@@ -31,19 +31,7 @@ void add(int cnt, DB a, Point c) {
 	area[cnt] += a;
 	centroid[cnt] = centroid[cnt] + c * a;
 }
-void solve(int n) {
-    for (int i = 0; i < n; ++ i){
-		keep[i] = true;
-		for (int j = 0; j < n; ++ j) if (i != j) {
-			if ((issame(c[i], c[j]) && i < j) || (!issame(c[i], c[j]) && overlap(c[j], c[i]))){
-				keep[i] = false;
-				break;
-			}
-		}
-	}
-    int C = 0;
-    for (int i = 0; i < n; ++ i)
-		if (keep[i]) c[C ++] = c[i];
+void solve(int C) {
 	for (int i = 1; i <= C; ++ i) {
         area[i] = 0;
         centroid[i] = Point(0, 0);
@@ -51,8 +39,14 @@ void solve(int n) {
 	for (int i = 0; i < C; ++i) {
 		int cnt = 1;
 		vector<Event> evt;
-        for (int j = 0; j < C; ++j) {
-			if (j != i && intersect(c[i], c[j])) {
+		for (int j = 0; j < i; ++j) if (issame(c[i], c[j])) ++cnt;
+		for (int j = 0; j < C; ++j) {
+			if (j != i && !issame(c[i], c[j]) && overlap(c[j], c[i])) {
+				++cnt;
+			}
+		}
+		for (int j = 0; j < C; ++j) {
+			if (j != i && !overlap(c[j], c[i]) && !overlap(c[i], c[j]) && intersect(c[i], c[j])) {
 				addEvent(c[i], c[j], evt, cnt);
 			}
 		}
