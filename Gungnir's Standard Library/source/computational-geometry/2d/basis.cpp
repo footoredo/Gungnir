@@ -1,8 +1,5 @@
-typedef double DB;
-const DB eps = 1e-8;
-
 int sign(DB x) {
-	return x < -eps ? -1 : ( x > eps ? 1 : 0 );
+	return (x > eps) - (x < -eps);
 }
 DB msqrt(DB x) {
 	return sign(x) > 0 ? sqrt(x) : 0;
@@ -10,21 +7,6 @@ DB msqrt(DB x) {
 
 struct Point {
 	DB x, y;
-	Point(): x(0), y(0) {}
-	Point(DB x, DB y): x(x), y(y) {}
-	Point operator+(const Point &rhs) const {
-		return Point(x + rhs.x, y + rhs.y);
-	}
-	Point operator-(const Point &rhs) const {
-		return Point(x - rhs.x, y - rhs.y);
-	}
-	Point operator*(DB k) const {
-		return Point(x * k, y * k);
-	}
-	Point operator/(DB k) const {
-		assert(sign(k));
-		return Point(x / k, y / k);
-	}
 	Point rotate(DB ang) const {  // 逆时针旋转 ang 弧度
 		return Point(cos(ang) * x - sin(ang) * y,
 				cos(ang) * y + sin(ang) * x);
@@ -106,6 +88,25 @@ bool tanCP(const Circle &c, const Point &p0, Point &p1, Point &p2) {
 	p2 = c.o + p - delta;
 	return true;
 }
+// 求圆到圆的外共切线，按关于 c1.o 的顺时针方向返回两条线
+vector<Line> extanCC(const Circle &c1, const Circle &c2) {
+	vector<Line> ret;
+	if (sign(c1.r - c2.r) == 0) {
+		Point dir = c2.o - c1.o;
+		dir = (dir * (c1.r / dir.len())).turn90();
+		ret.push_back(Line(c1.o + dir, c2.o + dir));
+		ret.push_back(Line(c1.o - dir, c2.o - dir));
+	} else {
+		Point p = (c1.o * -c2.r + c2.o * c1.r) / (c1.r - c2.r);
+		Point p1, p2, q1, q2;
+		if (tanCP(c1, p, p1, p2) && tanCP(c2, p, q1, q2)) {
+			if (c1.r < c2.r) swap(p1, p2), swap(q1, q2);
+			ret.push_back(Line(p1, q1));
+			ret.push_back(Line(p2, q2));
+		}
+	}
+	return ret;
+}
 // 求圆到圆的内共切线，按关于 c1.o 的顺时针方向返回两条线
 std::vector<Line> intanCC(const Circle &c1, const Circle &c2) {
 	std::vector<Line> ret;
@@ -117,20 +118,16 @@ std::vector<Line> intanCC(const Circle &c1, const Circle &c2) {
 	}
 	return ret;
 }
-// 点在多边形内
-bool inPolygon(const Point& p, const std::vector<Point>& poly) {
-	int n = poly.size();
-	int counter = 0;
-	for (int i = 0; i < n; ++ i) {
-		P a = poly[i], b = poly[(i + 1) % n];
-		if (onSeg(Line(a, b), p)) return false; // 边界上不算
-		int x = sign(det(p - a, b - a));
-		int y = sign(a.y - p.y);
-		int z = sign(b.y - p.y);
-		if (x > 0 && y <= 0 && z > 0) ++ counter;
-		if (x < 0 && z <= 0 && y > 0) -- counter;
+bool contain(vector<Point> polygon, Point p) { // 判断点 p 是否被多边形包含，包括落在边界上
+	int ret = 0, n = polygon.size();
+	for(int i = 0; i < n; ++ i) {
+		Point u = polygon[i], v = polygon[(i + 1) % n];
+		if (onSeg(Line(u, v), p)) return true;  // Here I guess.
+		if (sign(u.y - v.y) <= 0) swap(u, v);
+		if (sign(p.y - u.y) > 0 || sign(p.y - v.y) <= 0) continue;
+		ret += sign(det(p, v, u)) > 0;
 	}
-	return counter != 0;
+	return ret & 1;
 }
 // 用半平面 (q1,q2) 的逆时针方向去切凸多边形
 std::vector<Point> convexCut(const std::vector<Point>&ps, Point q1, Point q2) {
