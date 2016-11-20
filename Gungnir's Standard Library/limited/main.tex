@@ -74,6 +74,7 @@
 %configure fonts
 \setmonofont{Menlo}[Scale=0.8]
 \setCJKmainfont{STHeiti}
+\usepackage{yfonts}
 
 \renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,0.5}{\scriptsize {\arabic{FancyVerbLine}}}}
 
@@ -133,7 +134,8 @@
 	breakbytoken=false,
 }
 \begin{document}\scriptsize
-	\title{\textbf{\LARGE{Gungnir's Standard Code Library}}}
+	\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+	\title{\Huge{\textgoth{Gungnir's Standard Code Library}}\thanks{https://github.com/footoredo/Gungnir}}
 	\author{\emph{Shanghai Jiao Tong University}}
 	\date{Dated: \today}
 	\maketitle

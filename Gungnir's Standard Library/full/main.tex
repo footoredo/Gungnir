@@ -6,6 +6,7 @@
 \usepackage{listings, color, fontspec, minted, setspace, titlesec, fancyhdr, dingbat, mdframed, multicol}
 \usepackage{graphicx, amssymb, amsmath, textcomp, booktabs}
 \usepackage{xeCJK}
+\usepackage{yfonts}
 
 %\setlength{\parindent}{0em}
 %\setlength{\mathindent}{0pt}
@@ -72,7 +73,8 @@
 	breakbytoken=false,
 }
 
-\title{\textbf{\LARGE{Gungnir's Standard Code Library}}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\title{\Huge{\textgoth{Gungnir's Standard Code Library}}\thanks{https://github.com/footoredo/Gungnir}}
 	\author{\emph{Shanghai Jiao Tong University}}
 	\date{Dated: \today}
 
